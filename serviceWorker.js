@@ -7,18 +7,24 @@ this.addEventListener('install', function (event) {
         caches.open('v1').then(function (cache) {
             /* 指定要缓存的内容，地址为相对于跟域名的访问路径 */
             return cache.addAll([
-                './skyworker-jpg/index.html'
+                './static/jweixin-1.6.0.js'
             ]);
         })
     );
 });
 
+this.addEventListener('activate', function (event) {
+    console.log('Service Worker activate');
+  });
 /* 注册fetch事件，拦截全站的请求 */
 this.addEventListener('fetch', function(event) {
   event.respondWith(
-    // magic goes here
+        // magic goes here
       
       /* 在缓存中匹配对应请求资源直接返回 */
     caches.match(event.request)
   );
 });
+this.addEventListener('message', function (event) {
+    console.log(event.data); // this message is from page
+  });

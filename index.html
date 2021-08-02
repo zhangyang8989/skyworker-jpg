@@ -21,6 +21,8 @@
                 .then(function (registration) {
  
                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    navigator.serviceWorker.controller && navigator.serviceWorker.controller.postMessage("this message1 is from page");
+                    registration.active.postMessage("this message2 is from page")
                 })
                 .catch(function (err) {
  
